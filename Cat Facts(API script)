@@ -1,0 +1,51 @@
+### Tell me if you want to know facts about dog or cat
+### Tell me how many facts you want to know regarding your choice
+### I'll list that many facts about dog/cat :)
+
+
+import requests
+url = 'https://cat-fact.herokuapp.com/facts/random'
+
+
+
+w = input('Hey there! Wannan know some facts about cats/dogs?\n Tell me yes or no plz:)')
+if w.lower() == 'no':
+    print('bitch you are mean, but anyways...')
+else:
+    print('Great, lets continue!')
+
+
+while True:
+    animal = input("you wanna know facts about dog or cat?")
+    if animal.lower() == 'dog' or animal == 'cat':
+        break
+    else:
+        input('I can only tell you a fact about cat or dog')
+
+
+while True:
+    many = input("Enter a positive integer less than 20: ")
+    if not many.isdigit():
+        print("Integers only, please try again.")
+    elif int(many) <= 0:
+        print("Number has to be positive, please try again.")
+    elif int(many) > 20:
+        print("Number is too large, enter a number less than 20.")
+    else:
+        break
+
+payload = {'animal_type':animal,'amount':many}
+r = requests.get(url,params=payload)
+x = r.text
+x = x.split(',')
+
+y = list()
+for i in x:
+    if i.startswith('"text"'):
+        y.append(i)
+
+for i in y:
+    colon_index = i.find(':')
+    text = i [colon_index+1:]
+    print(text)
+
