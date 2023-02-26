@@ -2,17 +2,24 @@
 ### Tell me how many facts you want to know regarding your choice
 ### I'll list that many facts about dog/cat :)
 
+#############################
+#测试问题1答案顺序 'maybe' then 'no' then 'yes'
+#测试问题2答案顺序 ‘elephant' then 'dog' or 'cat'
+#测试问题3答案顺序 '100' then 'xxx' then '-2' then '13'
 
 import requests
 url = 'https://cat-fact.herokuapp.com/facts/random'
 
 
-
-w = input('Hey there! Wannan know some facts about cats/dogs?\n Tell me yes or no plz:)')
-if w.lower() == 'no':
-    print('bitch you are mean, but anyways...')
-else:
+while True:
+  w = input('Hey there! Wannan know some facts about cats/dogs?\n Tell me yes or no plz:)')
+  if w.lower() == 'no':
+      print('bitch you are mean, try again. Pretend you are interested in this plz,i.e, say:"yes"')
+  elif w.lower()!='yes'and w.lower()!='no':
+      print('bro,yes or no only')
+  elif w.lower() == 'yes':
     print('Great, lets continue!')
+    break
 
 
 while True:
@@ -34,6 +41,8 @@ while True:
     else:
         break
 
+print('Heres the '+ many + ' facts about ' + animal)
+
 payload = {'animal_type':animal,'amount':many}
 r = requests.get(url,params=payload)
 x = r.text
@@ -48,4 +57,13 @@ for i in y:
     colon_index = i.find(':')
     text = i [colon_index+1:]
     print(text)
+
+
+
+
+
+
+
+
+
 
